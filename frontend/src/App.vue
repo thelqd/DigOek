@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  <div class="row">
     <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
@@ -17,6 +18,8 @@
           </ul>
         </nav>
     <router-view/>
+      </div>
+
   </div>
 </template>
 
