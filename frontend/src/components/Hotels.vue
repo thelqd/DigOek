@@ -22,19 +22,18 @@
 
 <script>
 export default {
-  name: "Hotels",
-  data() {
+  name: 'Hotels',
+  data () {
     return {
-      searchString: ""
-    };
+      searchString: ''
+    }
   },
   watch: {
-    searchString: function(val, oldVal) {
-      console.log("new: %s, old: %s", val, oldVal);
+    searchString: function (val, oldVal) {
+      console.log('new: %s, old: %s', val, oldVal)
     }
   }
-};
+}
 </script>
 <style>
-
 </style>
