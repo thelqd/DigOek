@@ -1,10 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>Welcome</h1>
-    <h2>{{ msg }}</h2>
-
-    zxcvzcv
-
+  <div class="hello col-md-8">
+    <div class="row">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">{{ msg }}</h4>
+          <p class="card-text">Text</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -53,7 +53,7 @@ export default {
 }
 
 body {
-  background: url(/static/pics/background.jpg);
+  background: url(/static/pics/background.jpg) fixed;
   background-size: 100%;
   background-repeat: no-repeat;
   width: 100%;
