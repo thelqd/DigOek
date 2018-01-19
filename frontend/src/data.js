@@ -7,3 +7,11 @@ export function fetchHotels (cb) {
     cb(null, data.data)
   })
 }
+
+export function fetchHotel (id, cb) {
+  fetch(SERVERURL + 'hotel.php').then(function (response) {
+    return response.json()
+  }).then(function (data) {
+    cb(null, data.data)
+  })
+}
