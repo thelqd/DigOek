@@ -53,7 +53,7 @@
       </div>
     </form>
 <template v-if="hotels">
-      <div class="row" v-for="hotel in hotels.hotels" :key="hotel.id">
+      <div class="row" v-for="hotel in hotels" :key="hotel.id">
 	    <div class="col-md-12 mb-4">
 		  <div class="card">
 		    <div class="cardblock">
@@ -97,7 +97,7 @@ export default {
     this.fetchData()
   },
   watch: {
-    searchString: function (val, oldVal) {
+    searchHotel: function (val, oldVal) {
       console.log('new: %s, old: %s', val, oldVal)
       this.fetchData()
     }
@@ -128,7 +128,7 @@ export default {
       this.error = this.post = null
       this.loading = true
       // replace `getPost` with your data fetching util / API wrapper
-      data.fetchHotels((err, post) => {
+      data.fetchHotels(this.searchHotel, this.searchCity, (err, post) => {
         this.loading = false
         if (err) {
           this.error = err.toString()
