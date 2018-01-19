@@ -15,10 +15,17 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$app->group(['prefix' => 'v1'], function($app)
+$router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
 {
-    $app->get('test', [
+    $router->get('test', [
         'uses' => 'TestController@test',
         'as' => 'test'
     ]);
+    $router->group(['prefix' => 'public'], function($router)
+    {
+        $router->get('search', [
+            'uses' => 'HotelController@search',
+            'as' => 'hotelsearch'
+        ]);
+    });
 });
