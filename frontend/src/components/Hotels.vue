@@ -5,13 +5,28 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">Choose your room!</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            <template v-if="modalHotel">
+              <div class="row" v-for="room in modalHotel.data" :key="room.id">
+	              <div class="col-md-3 mb-3">
+                  {{ room.id }}
+                </div>
+                <div class="col-md-3 mb-3">
+                  {{ room.name }}
+                </div>
+                <div class="col-md-3 mb-3">
+                  {{ room.price }}
+                </div>
+                <div class="col-md-3 mb-3">
+                  <button type="button" class="btn btn-primary">Book!</button>
+                </div>
+              </div>
+            </template>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save changes</button>
@@ -97,14 +112,14 @@ export default {
     },
     viewHotel (hotel) {
       this.modalHotel = []
-
+      let self = this
       data.fetchHotel(hotel.id, (err, post) => {
         this.loading = false
         if (err) {
           this.error = err.toString()
           console.log(err)
         } else {
-          this.modalHotel = post
+          self.modalHotel = post
           console.log(post)
         }
       })

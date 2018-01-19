@@ -12,6 +12,6 @@ export function fetchHotel (id, cb) {
   fetch(SERVERURL + 'hotel.php').then(function (response) {
     return response.json()
   }).then(function (data) {
-    cb(null, data.data)
+    cb(null, data)
   })
 }
