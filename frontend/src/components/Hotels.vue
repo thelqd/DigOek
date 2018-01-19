@@ -1,5 +1,5 @@
 <template>
-  <div class="hello col-md-10" >
+  <div class="hello col-md-8">
     <template v-if="modalHotel">
     <div class="modal" tabindex="-1" role="dialog" style="display:block">
       <div class="modal-dialog" role="document">
@@ -38,13 +38,13 @@
     </template>
     <form>
       <div class="form-row">
-          <div class="form-group col-md-5 mb-5">
+          <div class="form-group col-md-6 mb-4">
             <input type="text" placeholder="Hotel" class="form-control" id="inputHotel" v-model="searchHotel">
           </div>
-		  <div class="form-group col-md-3 mb-5">
+		  <div class="form-group col-md-4 mb-4">
             <input type="text" placeholder="City" class="form-control" id="inputCity" v-model="searchCity">
           </div>
-          <div class="form-group col-md-2 mb-5">
+          <div class="form-group col-md-2 mb-4">
             <select id="inputStars" class="form-control">
               <option selected>Rating</option>
               <option>1+ Star</option>
@@ -58,7 +58,7 @@
     </form>
 <template v-if="hotels">
       <div class="row" v-for="hotel in hotels.hotels" :key="hotel.id">
-	    <div class="col-md-10 mb-3">
+	    <div class="col-md-12 mb-4">
 		  <div class="card">
 		    <div class="cardblock">
 		      <div class="row">
@@ -72,7 +72,7 @@
 				</div>
 			    <div class="col-md-3">
 				  <h2 class="card-text">€29,-</h2>
-				  <a class="btn btn-primary" @click="viewHotel(hotel)">View Hotel</a>
+				  <a class="btn btn-primary" style="color: #fff" @click="viewHotel(hotel)">View Hotel</a>
 			    </div>
 			  </div>
 			</div>
