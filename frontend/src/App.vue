@@ -1,25 +1,39 @@
 <template>
-	<div id="app">
-		<div class="row">
-			<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" style="background-color: #fff">
-				<ul class="nav nav-pills flex-column">
-					<li class="nav-item">
-						<router-link :exact=true active-class="active" class="nav-link" to="/">Welcome</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link active-class="active" class="nav-link" to="Login">Login</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link active-class="active" class="nav-link" to="Hotels">Hotels</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link active-class="active" class="nav-link" to="Logout">Logout</router-link>
-					</li>
-				</ul>
-			</nav>
-			<router-view/>
-		</div>
-	</div>
+  <div id="app">
+    <div class="row mb-4">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <nav class="navbar navbar-expand-sm bg-light">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <router-link :exact=true active-class="active" class="nav-link" to="/">Welcome</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link active-class="active" class="nav-link" to="Login">Login</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link active-class="active" class="nav-link" to="Hotels">Hotels</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link active-class="active" class="nav-link" to="Logout">Logout</router-link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <router-view/>
+      <div class="col-md-2">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,6 +49,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 </style>
