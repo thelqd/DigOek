@@ -1,10 +1,26 @@
 <template>
-  <div class="hello">
-    <h1>Welcome</h1>
-    <h2>{{ msg }}</h2>
-
-    zxcvzcv
-
+  <div class="hello col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h4>{{ msg }}</h4>
+      </div>
+	  <div class="card-body">
+        <div class="row mb-4">
+	      <div class="col-md-6">
+            <h5 class="card-title" style="text-align: left">About us</h5>
+		    <p class="card-text"  style="text-align: left">It all started with three students and a rather good idea. 
+Business Informatic Students realized how useful it would be to connect hotels and guests.
+From their rooms in flatshares, they built a website called Bad Hotel.</br>
+The formula for success was pretty simple: working hard to get it right for the professor.</br>
+We move forward by taking lots of small steps and executing at incredible speeds. 
+Also we are never satisfied and keep proving ourselves every day.</p>
+          </div>
+	      <div class="col-md-6">
+            <img class="rounded mx-auto d-block" :src="'/static/pics/welcome-image.jpg'"  style="width: 100%">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

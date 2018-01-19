@@ -14,7 +14,7 @@
             <template v-if="modalHotel">
               <div class="row" v-for="room in modalHotel.data" :key="room.id">
 	            <div class="col-md-3 mb-3">
-                  <img class="rounded mx-auto d-block" src="../pics/room1.jpg" style="width: 100%">
+                  <img class="rounded mx-auto d-block" :src="'/static/pics/room' + (Math.abs(hashCode(room.name))%7+1) + '.jpg'"  style="width: 100%">
                 </div>
                 <div class="col-md-3 mb-3">
                   {{ room.name }}
@@ -59,7 +59,7 @@
 		    <div class="cardblock">
 		      <div class="row">
 			    <div class="col-md-4">
-			      <img class="img-fluid rounded mb-3 mb-md-0" src="../pics/hotel2.jpg" alt="">
+			      <img class="img-fluid rounded mb-3 mb-md-0" :src="'/static/pics/hotel' + (Math.abs(hashCode(hotel.name))%6+1) + '.jpg'"  alt="">
 			    </div>
 			    <div class="col-md-5">
 				  <h4 class="card-title" style="margin-top: 5px">{{ hotel.name }}</h4>
@@ -103,6 +103,9 @@ export default {
     }
   },
   methods: {
+    hashCode (str) {
+      return data.hashCode(str)
+    },
     closeModal () {
       this.modalHotel = null
     },
