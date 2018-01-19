@@ -13,24 +13,20 @@
           <div class="modal-body">
             <template v-if="modalHotel">
               <div class="row" v-for="room in modalHotel.data" :key="room.id">
-	              <div class="col-md-3 mb-3">
-                  {{ room.id }}
+	            <div class="col-md-3 mb-3">
+                  <img class="rounded mx-auto d-block" src="../pics/room1.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-3 mb-3">
                   {{ room.name }}
                 </div>
                 <div class="col-md-3 mb-3">
-                  {{ room.price }}
+                  € {{ room.price }}
                 </div>
                 <div class="col-md-3 mb-3">
                   <button type="button" class="btn btn-primary">Book!</button>
                 </div>
               </div>
             </template>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-secondary" @click="closeModal">Close</button>
           </div>
         </div>
       </div>
@@ -67,12 +63,12 @@
 			    </div>
 			    <div class="col-md-5">
 				  <h4 class="card-title" style="margin-top: 5px">{{ hotel.name }}</h4>
-				  <p class="card-text text-left">{{ hotel.name }} mit seiner angenehmen Atmosphäre lädt Sie herzlich ein zum Erholen auf der Geschäftsreise, zum Erkunden der Umgebung und zum effektiven Arbeiten.</p>
+				  <p class="card-text text-left">{{ hotel.name }}  is the right choice for visitors who are searching for a combination of charm and design, and a convenient position from which to explore the city.</p>
 				  <p class="card-text">Rating</p>
 				</div>
 			    <div class="col-md-3">
-				  <h2 class="card-text">€29,-</h2>
-				  <a class="btn btn-primary" style="color: #fff" @click="viewHotel(hotel)">View Hotel</a>
+				  <h2 class="card-text">€ 9,99</h2>
+				  <a class="btn btn-primary" style="color: #fff" @click="viewHotel(hotel)">View Rooms</a>
 			    </div>
 			  </div>
 			</div>
@@ -144,10 +140,5 @@ export default {
 }
 </script>
 <style>
-body {
-  background: url(../pics/background.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 100%;
-}
+
 </style>

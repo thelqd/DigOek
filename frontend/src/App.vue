@@ -51,4 +51,11 @@ export default {
   color: #2c3e50;
   margin-top: 30px;
 }
+
+body {
+  background: url(pics/background.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+}
 </style>
