@@ -52,5 +52,10 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'uses' => 'UserController@logout',
             'as' => 'logout'
         ]);
+
+        $router->post('book/{hotelId}/{roomName}', [
+            'uses' => 'BookingController@book',
+            'as' => 'booking'
+        ]);
     });
 });
