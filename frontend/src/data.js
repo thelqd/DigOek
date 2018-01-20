@@ -26,6 +26,24 @@ export function fetchHotels (searchHotel, searchCity, cb) {
     })
 }
 
+export function rateHotel (id, rating, cb) {
+  axios.get(SERVERURL + 'rate/' + id, {
+    params: {
+      auth: shared.apikey
+    },
+    data: {
+    }
+  })
+    .then(function (response) {
+      console.log(response)
+      cb(null, response.data)
+    })
+    .catch(function (error) {
+      cb(error)
+      console.log(error)
+    })
+}
+
 export function fetchHotel (id, cb) {
   axios.get(SERVERURL + 'hotel/' + id, {
     params: {

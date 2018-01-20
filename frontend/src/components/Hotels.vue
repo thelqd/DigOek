@@ -5,13 +5,18 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Choose your room!</h5>
+            <h5 class="modal-title">Hotel Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <template v-if="modalHotel">
+              <div class="row">
+                 {{modalHotel.name}}<br/>
+                 {{modalHotel.description}}  <star-rating :read-only="rated" :rating="modalHotel.rating" @rating-selected="putRating"></star-rating>
+              </div>
+
               <div class="row" v-for="room in modalHotel.rooms" :key="room.id">
 	            <div class="col-md-3 mb-3">
                   <img class="rounded mx-auto d-block" :src="'/static/pics/room' + (Math.abs(hashCode(room.name))%7+1) + '.jpg'"  style="width: 100%">
@@ -81,14 +86,19 @@
 
 <script>
 import * as data from '../data.js'
+import StarRating from 'vue-star-rating'
 export default {
   name: 'Hotels',
+  components: {
+    StarRating
+  },
   data () {
     return {
       searchHotel: '',
       searchCity: '',
       hotels: null,
-      modalHotel: null
+      modalHotel: null,
+      rated: false
     }
   },
   created () {
@@ -106,12 +116,18 @@ export default {
     hashCode (str) {
       return data.hashCode(str)
     },
+    putRating (rating) {
+      data.rateHotel(this.modalHotel.id, rating, (data, err) => {
+        this.rated = true
+      })
+    },
     closeModal () {
       this.modalHotel = null
     },
     viewHotel (hotel) {
       this.modalHotel = []
       let self = this
+      this.rated = false
       data.fetchHotel(hotel.id, (err, post) => {
         this.loading = false
         if (err) {
