@@ -12,7 +12,7 @@
           </div>
           <div class="modal-body">
             <template v-if="modalHotel">
-              <div class="row" v-for="room in modalHotel.data" :key="room.id">
+              <div class="row" v-for="room in modalHotel.rooms" :key="room.id">
 	            <div class="col-md-3 mb-3">
                   <img class="rounded mx-auto d-block" :src="'/static/pics/room' + (Math.abs(hashCode(room.name))%7+1) + '.jpg'"  style="width: 100%">
                 </div>
@@ -118,7 +118,7 @@ export default {
           this.error = err.toString()
           console.log(err)
         } else {
-          self.modalHotel = post
+          self.modalHotel = post.data
           console.log(post)
         }
       })
@@ -134,7 +134,7 @@ export default {
           this.error = err.toString()
           console.log(err)
         } else {
-          this.hotels = post
+          this.hotels = post.data
           console.log(post)
         }
       })

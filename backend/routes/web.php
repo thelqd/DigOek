@@ -27,5 +27,9 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'uses' => 'HotelController@search',
             'as' => 'hotelsearch'
         ]);
+        $router->get('hotel', [
+            'uses' => 'HotelController@get',
+            'as' => 'hotelget'
+        ]);
     });
 });
