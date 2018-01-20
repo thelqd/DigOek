@@ -2,10 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * @var string
+     */
+    private $pid;
+
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->pid =$this->request->input('pid', 0);
+    }
+
     /**
      * @param boolean $status
      * @param array $data
@@ -14,7 +31,7 @@ class Controller extends BaseController
     {
         $response = [
             'status' => (($status) ? 'success': 'failed'),
-            'pid' => '131342414dsad2qe-24414',
+            'pid' => $this->pid,
             'message' => $message,
             'data' => $data
         ];

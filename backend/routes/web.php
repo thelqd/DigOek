@@ -27,5 +27,20 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'uses' => 'HotelController@search',
             'as' => 'hotelsearch'
         ]);
+
+        $router->get('hotel/{id}', [
+            'uses' => 'HotelController@get',
+            'as' => 'gethotel'
+        ]);
+
+        $router->put('rate/{id}', [
+            'uses' => 'HotelController@rate',
+            'as' => 'rate'
+        ]);
+
+        $router->get('rate/{id}', [
+            'uses' => 'HotelController@getRating',
+            'as' => 'getrate'
+        ]);
     });
 });

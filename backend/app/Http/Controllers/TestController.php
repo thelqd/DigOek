@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Authinfo;
 use App\Models\Hotel;
+use App\Models\Rating;
+use App\Models\Room;
 use App\Models\Supplier;
 
 class TestController extends Controller
@@ -37,12 +39,26 @@ class TestController extends Controller
         $supplier->save();*/
 
         $names = [
-            'Hilton',
-            'Mariott',
-            'Trump',
-            'Ibes',
-            'Hyatt'
+            'Doppelzimmer' => [50, 69, 1],
+            'Einzelzimmer' => [70, 99, 2],
+            'Premium Suite' => [100, 150, 4]
         ];
+        $hotels = [4,5,6,7,8];
+
+        /*foreach($hotels as $hotel) {
+            foreach($names as $name => $data) {
+                $roomCount = rand(5, 15);
+                $price = rand($data[0], $data[1]);
+                for($i = 0; $i < $roomCount; $i++) {
+                    $room = new Room();
+                    $room->name = $name;
+                    $room->price = $price;
+                    $room->beds = $data[2];
+                    $room->hotel_id = $hotel;
+                    $room->save();
+                }
+            }
+        }
         /*foreach($names as $name) {
             $hotel = new Hotel();
             $hotel->name = $name;
@@ -50,6 +66,15 @@ class TestController extends Controller
             //$hotel->hotelchain_id = 0;
             $hotel->description = 'Lorem ipsum...';
             $hotel->save();
+        }*/
+        /*foreach($hotels as $hotel) {
+            for ($i = 0; $i < 10; $i++) {
+                $rating = new Rating();
+                $rating->stars = rand(1,5);
+                $rating->hotel_id = $hotel;
+                $rating->entrydate = date('Y-m-d H:i:s');
+                $rating->save();
+            }
         }*/
 
         //dd($authinfo, $supplier);
