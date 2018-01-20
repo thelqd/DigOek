@@ -1,20 +1,49 @@
+import axios from 'axios'
+
 // const SERVERURL = 'https://do.faljse.info/dummy/'
 const SERVERURL = 'https://do.faljse.info/backend/public/v1/public/'
 
+export const shared = {
+  user: null,
+  authkey: null,
+  apikey: '9ecc8459ea5f39f9da55cb4d71a70b5d1e0f0b80'
+}
+
 export function fetchHotels (searchHotel, searchCity, cb) {
-  fetch(SERVERURL + 'search?search=' + searchHotel + '&auth=9ecc8459ea5f39f9da55cb4d71a70b5d1e0f0b80').then(function (response) {
-    return response.json()
-  }).then(function (data) {
-    cb(null, data.data)
+  axios.get(SERVERURL + 'search', {
+    params: {
+      search: searchHotel,
+      auth: shared.apikey
+    }
   })
+    .then(function (response) {
+      console.log(response)
+      cb(null, response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+      cb(error)
+    })
 }
 
 export function fetchHotel (id, cb) {
-  fetch(SERVERURL + 'hotel.php').then(function (response) {
-    return response.json()
-  }).then(function (data) {
-    cb(null, data)
+  axios.get(SERVERURL + 'hotel/' + id, {
+    params: {
+      auth: shared.apikey
+    }
   })
+    .then(function (response) {
+      console.log(response)
+      cb(null, response.data)
+    })
+    .catch(function (error) {
+      cb(error)
+      console.log(error)
+    })
+}
+
+export function login (username, password, cb) {
+  cb(null, 'asdfasf')
 }
 
 // from http://mediocredeveloper.com/wp/?p=55

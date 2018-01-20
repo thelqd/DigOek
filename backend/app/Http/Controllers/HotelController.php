@@ -103,4 +103,14 @@ class HotelController extends Controller
         }
         return $hotelResult;
     }
+
+    public function get(Request $request)
+    {
+        $id = $request->input('id', null);
+        $hotel = Hotel::where('id', $id);
+
+        return $this->buildResponse(true, $hotel);
+
+    }
+
 }
