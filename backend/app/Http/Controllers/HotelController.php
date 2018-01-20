@@ -31,6 +31,10 @@ class HotelController extends Controller
         return $this->buildResponse(true, $result);
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function get($id)
     {
         $hotel = Hotel::findOrFail($id);
@@ -40,6 +44,10 @@ class HotelController extends Controller
         );
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function rate($id)
     {
         $stars = $this->request->input('stars', null);
@@ -49,6 +57,7 @@ class HotelController extends Controller
             $rating->hotel_id = $id;
             $rating->entrydate = date('Y-m-d H:i:s');
             $rating->save();
+            return $this->getRating($id);
         } else {
             return $this->buildResponse(
                 false,
@@ -58,6 +67,10 @@ class HotelController extends Controller
         }
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getRating($id)
     {
         $ratings = Hotel::findOrFail($id)->ratings->avg('stars');
@@ -75,6 +88,7 @@ class HotelController extends Controller
             'id' => $hotel->id,
             'name' => $hotel->name,
             'description' => $hotel->description,
+            'rating' => $hotel->ratings->avg('stars'),
             'rooms' => []
         ];
         $rooms = $hotel->rooms()
