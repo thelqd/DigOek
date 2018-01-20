@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Authinfo;
+use App\Models\Customer;
 use App\Models\Hotel;
 use App\Models\Rating;
 use App\Models\Room;
@@ -75,6 +76,59 @@ class TestController extends Controller
                 $rating->entrydate = date('Y-m-d H:i:s');
                 $rating->save();
             }
+        }*/
+
+        /*$users = [];
+        $users[] = [
+            'names' => [
+                'Max',
+                'Mustermann',
+                'maxm'
+            ],
+            'pass' => password_hash('maxm', PASSWORD_BCRYPT)
+        ];
+
+        $users[] = [
+            'names' => [
+                'Peter',
+                'Tester',
+                'pete'
+            ],
+            'pass' => password_hash('pete', PASSWORD_BCRYPT)
+        ];
+
+        $users[] = [
+            'names' => [
+                'Daniel',
+                'Schubert',
+                'dansch'
+            ],
+            'pass' => password_hash('dansch', PASSWORD_BCRYPT)
+        ];
+
+        $users[] = [
+            'names' => [
+                'Martin',
+                'Kunz',
+                'maku'
+            ],
+            'pass' => password_hash('maku', PASSWORD_BCRYPT)
+        ];
+
+        foreach($users as $user) {
+            $address = new Address();
+            $address->street = 'Teststr '.rand(1, 45);
+            $address->zipcode = '1010';
+            $address->city = 'Vienna';
+            $address->save();
+
+            $customer = new Customer();
+            $customer->firstname = $user['names'][0];
+            $customer->lastname  = $user['names'][1];
+            $customer->username = $user['names'][2];
+            $customer->password = $user['pass'];
+            $customer->address_id = $address->id;
+            $customer->save();
         }*/
 
         //dd($authinfo, $supplier);

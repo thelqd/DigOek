@@ -12,4 +12,9 @@ class Customer extends BaseModel
     {
         return $this->hasOne('App\Model\Address');
     }
+
+    public function authinfo()
+    {
+        return $this->hasOne('App\Models\Authinfo');
+    }
 }
