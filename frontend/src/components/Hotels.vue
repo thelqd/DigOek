@@ -28,7 +28,7 @@
                   € {{ room.price }}
                 </div>
                 <div class="col-md-3 mb-3">
-                  <button type="button" class="btn btn-primary">Book!</button>
+                  <button type="button" class="btn btn-primary" @click="book(room.name)">Book!</button>
                 </div>
               </div>
             </template>
@@ -115,6 +115,11 @@ export default {
   methods: {
     hashCode (str) {
       return data.hashCode(str)
+    },
+    book (roomName) {
+      data.bookHotel(this.modalHotel.id, roomName, (data, err) => {
+        console.log(data)
+      })
     },
     putRating (rating) {
       data.rateHotel(this.modalHotel.id, rating, (data, err) => {

@@ -26,6 +26,25 @@ export function fetchHotels (searchHotel, searchCity, cb) {
     })
 }
 
+export function bookHotel (id, roomName, cb) {
+  axios.post(SERVERURL + 'book/' + id + '/' + encodeURIComponent(roomName), {
+    auth: shared.apikey,
+    usertoken: shared.user.usertoken
+  }, {
+    params: {
+      auth: shared.apikey
+    }
+  })
+    .then(function (response) {
+      console.log(response)
+      cb(null, response.data)
+    })
+    .catch(function (error) {
+      cb(error)
+      console.log(error)
+    })
+}
+
 export function rateHotel (id, rating, cb) {
   axios.put(SERVERURL + 'rate/' + id, {
     stars: rating
