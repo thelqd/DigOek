@@ -66,7 +66,7 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'as' => 'getallhotels'
         ]);
 
-        $router->post('hotel', [
+        $router->put('hotel', [
             'uses' => 'ApiController@create',
             'as' => 'updatehotel'
         ]);
@@ -76,7 +76,7 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'as' => 'deletehotel'
         ]);
 
-        $router->put('hotel/{id}', [
+        $router->post('hotel/{id}', [
             'uses' => 'ApiController@update',
             'as' => 'updatehotel'
         ]);

@@ -10,4 +10,14 @@ class ApiController extends Controller
         // Hotel::find([1,2,3]);
         return $this->buildResponse(true, ['hallo' => 'welt']);
     }
+
+    public function create()
+    {
+        // create hotel
+    }
+
+    public function delete($id)
+    {
+        // delete hotel
+    }
 }
