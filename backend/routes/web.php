@@ -58,4 +58,12 @@ $router->group(['prefix' => 'v1', 'middleware' => 'auth'], function($router)
             'as' => 'booking'
         ]);
     });
+
+    $router->group(['prefix' => 'api'], function($router)
+    {
+        $router->get('hotels', [
+            'uses' => 'ApiController@get',
+            'as' => 'getallhotels'
+        ]);
+    });
 });

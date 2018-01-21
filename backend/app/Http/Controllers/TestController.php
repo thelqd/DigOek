@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Auth;
 use App\Models\Address;
 use App\Models\Authinfo;
 use App\Models\Customer;
 use App\Models\Hotel;
+use App\Models\HotelSupplier;
 use App\Models\Rating;
 use App\Models\Room;
 use App\Models\Supplier;
@@ -130,8 +132,58 @@ class TestController extends Controller
             $customer->address_id = $address->id;
             $customer->save();
         }*/
+        /*$supplier = Supplier::find(2);
+
+        $supplier2 = Supplier::find(3);
+
+        $authinfo = new Authinfo();
+        $authinfo->apikey = Auth::generateToken(time());
+        $authinfo->refreshapikey = false;
+        $authinfo->save();
+
+        $supplier->authinfo_id = $authinfo->id;
+        $supplier->save();
+
+        $authinfo = new Authinfo();
+        $authinfo->apikey = Auth::generateToken(time()+200);
+        $authinfo->refreshapikey = false;
+        $authinfo->save();
+
+        $supplier2->authinfo_id = $authinfo->id;
+        $supplier2->save();
+
+        /*$hotsup = new HotelSupplier();
+        $hotsup->hotel_id = 4;
+        $hotsup->supplier_id = $supplier->id;
+        $hotsup->timestamp = date('Y-m-d H:i:s');
+        $hotsup->save();
+
+        $hotsup = new HotelSupplier();
+        $hotsup->hotel_id = 5;
+        $hotsup->supplier_id = $supplier->id;
+        $hotsup->timestamp = date('Y-m-d H:i:s');
+        $hotsup->save();
+
+        $hotsup = new HotelSupplier();
+        $hotsup->hotel_id = 6;
+        $hotsup->supplier_id = $supplier->id;
+        $hotsup->timestamp = date('Y-m-d H:i:s');
+        $hotsup->save();
+
+        $hotsup = new HotelSupplier();
+        $hotsup->hotel_id = 7;
+        $hotsup->supplier_id = $supplier2->id;
+        $hotsup->timestamp = date('Y-m-d H:i:s');
+        $hotsup->save();
+
+        $hotsup = new HotelSupplier();
+        $hotsup->hotel_id = 8;
+        $hotsup->supplier_id = $supplier2->id;
+        $hotsup->timestamp = date('Y-m-d H:i:s');
+        $hotsup->save();*/
 
         //dd($authinfo, $supplier);
+
         return response()->json(true);
     }
 }
