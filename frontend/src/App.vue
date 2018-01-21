@@ -11,13 +11,10 @@
                 <router-link :exact=true active-class="active" class="nav-link" to="/">Welcome</router-link>
               </li>
               <li class="nav-item">
-                <router-link active-class="active" class="nav-link" to="Login">Login</router-link>
+                <router-link active-class="active" class="nav-link" to="Login">Account</router-link>
               </li>
               <li class="nav-item">
                 <router-link active-class="active" class="nav-link" to="Hotels">Hotels</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link active-class="active" class="nav-link" to="Logout">Logout</router-link>
               </li>
             </ul>
           </nav>

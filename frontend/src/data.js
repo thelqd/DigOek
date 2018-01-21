@@ -27,11 +27,11 @@ export function fetchHotels (searchHotel, searchCity, cb) {
 }
 
 export function rateHotel (id, rating, cb) {
-  axios.get(SERVERURL + 'rate/' + id, {
+  axios.put(SERVERURL + 'rate/' + id, {
+    stars: rating
+  }, {
     params: {
       auth: shared.apikey
-    },
-    data: {
     }
   })
     .then(function (response) {
@@ -61,7 +61,25 @@ export function fetchHotel (id, cb) {
 }
 
 export function login (username, password, cb) {
-  cb(null, 'asdfasf')
+  axios.put(SERVERURL + 'login', {
+    auth: shared.apikey,
+    pid: 123,
+    username,
+    password
+  }, {
+    params: {
+      auth: shared.apikey
+    }
+
+  })
+    .then(function (response) {
+      console.log(response)
+      cb(null, response.data)
+    })
+    .catch(function (error) {
+      cb(error)
+      console.log(error)
+    })
 }
 
 // from http://mediocredeveloper.com/wp/?p=55
