@@ -1,5 +1,10 @@
 <template>
-  <div class="hello">
+  <div class="hello col-md-8">
+       <div class="card mb-4">
+      <div class="card-header">
+        <h4>Account</h4>
+      </div>
+	  <div class="card-body">
     <template v-if="shared.user === null">
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -33,8 +38,9 @@
   </div>
   <button type="submit" class="btn btn-primary" @click="logout">Sign out</button>
 </form>
+
     </template>
-  </div>
+</div>  </div> </div>
 </template>
 
 <script>
