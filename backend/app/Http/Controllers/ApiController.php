@@ -62,7 +62,10 @@ class ApiController extends Controller
                     }
 
 
-                    return $this->buildResponse(true, [], 'Hotel Created');
+                    return $this->buildResponse(
+                        true,
+                        ['hotelId' => $hotel->id],
+                        'Hotel Created');
                 } else {
                     $errorMessage = 'Hotel data incomplete';
                 }
@@ -127,8 +130,33 @@ class ApiController extends Controller
      */
     public function delete($id)
     {
-        // delete hotel
-        return $this->buildResponse(true, [], 'Hotel deleted');
+        $data = $this->request->input('data', null);
+        if(isset($data) && isset($data['supplierId'])) {
+            $supplierId = (int)$data['supplierId'];
+            if (Auth::checkSupplierKey($supplierId, $this->request->input('auth'))) {
+                $hotel = Hotel::findOrFail($id);
+                $count = HotelSupplier::where('hotel_id', $hotel->id)
+                    ->andWhere('supplier_id', $supplierId)
+                    ->count();
+                if($count == 1) {
+                    // Hotel belongs to supplier, delete rooms, relation and hotel itself
+                    $hotel->rooms->delete();
+                    $hotel->ratings->delete();
+                    HotelSupplier::where('hotel_id', $hotel->id)
+                        ->andWhere('supplier_id', $supplierId)
+                        ->delete();
+                    $hotel->delete();
+                    return $this->buildResponse(true, [], 'Hotel deleted');
+                } else {
+                    $errorMessage = 'Hotel not available for supplier';
+                }
+            } else {
+                $errorMessage = 'Api key not valid for supplier';
+            }
+        } else {
+            $errorMessage = 'No supplier id provided';
+        }
+        return $this->buildResponse(true, [], $errorMessage);
     }
 
     /**
