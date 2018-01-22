@@ -174,16 +174,22 @@ class ApiController extends Controller
             $supplierId = (int)$data['supplierId'];
             if (Auth::checkSupplierKey($supplierId, $this->request->input('auth'))) {
                 $hotel = Hotel::findOrFail($id);
-                $count = HotelSupplier::where('hotel_id', $hotel->id)
-                    ->andWhere('supplier_id', $supplierId)
-                    ->count();
+                $count = HotelSupplier::where(
+                    [
+                        'hotel_id' => $hotel->id,
+                        'supplier_id' => $supplierId
+                    ]
+                )->count();
                 if($count == 1) {
                     // Hotel belongs to supplier, delete rooms, ratings, relation and hotel itself
-                    $hotel->rooms->delete();
-                    $hotel->ratings->delete();
-                    HotelSupplier::where('hotel_id', $hotel->id)
-                        ->andWhere('supplier_id', $supplierId)
-                        ->delete();
+                    $hotel->rooms()->delete();
+                    $hotel->ratings()->delete();
+                    HotelSupplier::where(
+                        [
+                            'hotel_id' => $hotel->id,
+                            'supplier_id' => $supplierId
+                        ]
+                    )->delete();
                     $hotel->delete();
                     return $this->buildResponse(true, [], 'Hotel deleted');
                 } else {
