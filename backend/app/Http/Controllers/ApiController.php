@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Authinfo;
-use App\Models\Supplier;
-use App\Models\HotelSupplier;
-use App\Models\Hotel;
-
 
 use App\Auth;
 use App\Models\Address;
 use App\Models\Hotel;
 use App\Models\HotelSupplier;
 use App\Models\Room;
+use App\Models\Authinfo;
+use App\Models\Supplier;
 
 class ApiController extends Controller
 {
@@ -181,7 +178,7 @@ class ApiController extends Controller
                     ->andWhere('supplier_id', $supplierId)
                     ->count();
                 if($count == 1) {
-                    // Hotel belongs to supplier, delete rooms, relation and hotel itself
+                    // Hotel belongs to supplier, delete rooms, ratings, relation and hotel itself
                     $hotel->rooms->delete();
                     $hotel->ratings->delete();
                     HotelSupplier::where('hotel_id', $hotel->id)
