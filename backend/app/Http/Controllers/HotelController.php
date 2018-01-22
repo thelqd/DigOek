@@ -28,7 +28,7 @@ class HotelController extends Controller
             $result[] = $this->buildHotel($hotel);
         }
 
-        return $this->buildResponse(true, $result);
+        return $this->buildResponse(true, [], $result);
     }
 
     /**
