@@ -76,6 +76,49 @@ class ApiController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     * @author Martin Kunz
+     */
+    public function update()
+    {
+        $data = $this->request->input('data', null);
+        $auth = $this->request->input('auth', null);
+        
+        
+        if(!isset($data))
+            return $this->buildResponse(false, [], "data missing");
+        if(!isset($auth))
+            return $this->buildResponse(false, [], "fake auth missing");   
+        $supplierID = (int)$data['supplierId'];
+        if (!Auth::checkSupplierKey(
+            $supplierID,
+            $auth)) return $this->buildResponse(false, [], "fake auth failed");
+        $hotelData = $data['hotel'];
+        if(!isset($hotelData['name']))
+            return $this->buildResponse(false, [], "no hotel name");
+        $addressData = $hotelData['address'];
+        $address = new Address();
+        $address->street = $addressData['street'];
+        $address->zipcode = $addressData['zipcode'];
+        $address->city = $addressData['city'];
+        $address->update();
+
+        $hotel = new Hotel();
+        $hotel->address_id = $address->id;
+        $hotel->hotelchain_id = null;
+        $hotel->name = $hotelData['name'];
+        $hotel->description = $hotelData['description'];
+        $hotel->update();
+        
+        $rooms = $hotelData['rooms'];
+        foreach($data['hotel']['rooms'] as $room) {
+            $this->addRoom($hotel->id, $room);
+        }
+        return $this->buildResponse(true, [], 'Hotel Updated');
+    }
+
+
+    /**
      * @param integer $id
      * @return \Illuminate\Http\JsonResponse
      * @author Daniel Schubert
@@ -103,4 +146,7 @@ class ApiController extends Controller
             $newRoom->save();
         }
     }
+
+ 
+
 }
