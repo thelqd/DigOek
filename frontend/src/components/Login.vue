@@ -1,5 +1,10 @@
 <template>
-  <div class="hello">
+  <div class="hello col-md-8">
+       <div class="card mb-4">
+      <div class="card-header">
+        <h4>Account</h4>
+      </div>
+	  <div class="card-body">
     <template v-if="shared.user === null">
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -31,15 +36,16 @@
       <input type="text" class="form-control" v-model="shared.user.address.zip_code">
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign out</button>
+  <button type="submit" class="btn btn-primary" @click="logout">Sign out</button>
 </form>
 
     </template>
-  </div>
+</div>  </div> </div>
 </template>
 
 <script>
 import * as data from '../data.js'
+import Cookie from 'js-cookie'
 export default {
   name: 'Login',
   data () {
@@ -55,6 +61,15 @@ export default {
       data.login(this.username, this.password, (err, data) => {
         if (err) console.log(err)
         self.shared.user = data.data
+        Cookie.set('auth', data.data)
+      })
+    },
+    logout () {
+      let self = this
+      data.logout((err, data) => {
+        if (err) console.log(err)
+        self.shared.user = null
+        Cookie.set('auth', null)
       })
     }
   }

@@ -11,12 +11,12 @@
             </button>
           </div>
           <div class="modal-body">
-            <template v-if="modalHotel">
+            <template v-if="modalHotel" >
               <div class="row">
                  {{modalHotel.name}}<br/>
-                 {{modalHotel.description}}  <star-rating :read-only="rated" :rating="modalHotel.rating" @rating-selected="putRating"></star-rating>
+                 {{modalHotel.description}}  <star-rating :read-only="rated || shared.user == null" :rating="modalHotel.rating" @rating-selected="putRating"></star-rating>
               </div>
-
+              <template v-if="booked==null">
               <div class="row" v-for="room in modalHotel.rooms" :key="room.id">
 	            <div class="col-md-3 mb-3">
                   <img class="rounded mx-auto d-block" :src="'/static/pics/room' + (Math.abs(hashCode(room.name))%7+1) + '.jpg'"  style="width: 100%">
@@ -27,10 +27,24 @@
                 <div class="col-md-3 mb-3">
                   € {{ room.price }}
                 </div>
+
                 <div class="col-md-3 mb-3">
-                  <button type="button" class="btn btn-primary" @click="book(room.name)">Book!</button>
+                  <button type="button" :disabled="shared.user == null" class="btn btn-primary" @click="book(room.name)">Book!</button>
                 </div>
               </div>
+            </template>
+            <template v-if="booked">
+              <div class="row">
+	              <div class="col-md-8 mb-3">
+                  Thanks for booking {{ booked }}
+                </div>
+
+              <div class="col-md-3 mb-3">
+                  <img class="rounded mx-auto d-block" :src="'/static/pics/room' + (Math.abs(hashCode(booked))%7+1) + '.jpg'"  style="width: 100%">
+                </div>
+              </div>
+            </template>
+
             </template>
           </div>
         </div>
@@ -94,16 +108,16 @@ export default {
   },
   data () {
     return {
+      shared: data.shared,
       searchHotel: '',
       searchCity: '',
       hotels: null,
       modalHotel: null,
-      rated: false
+      rated: false,
+      booked: null
     }
   },
   created () {
-    // fetch the data when the view is created and the data is
-    // already being observed
     this.fetchData()
   },
   watch: {
@@ -118,6 +132,7 @@ export default {
     },
     book (roomName) {
       data.bookHotel(this.modalHotel.id, roomName, (data, err) => {
+        this.booked = roomName
         console.log(data)
       })
     },
@@ -128,6 +143,7 @@ export default {
     },
     closeModal () {
       this.modalHotel = null
+      this.booked = null
     },
     viewHotel (hotel) {
       this.modalHotel = []

@@ -35,7 +35,7 @@ class BookingController extends Controller
     {
         if($this->customer instanceof Customer) {
             $hotel = Hotel::findOrFail($hotelId);
-            $room = $hotel->rooms->where('name', $roomName);
+            $room = $hotel->rooms->where('name', urldecode($roomName));
             $roomArray = $room->toArray();
             if(count($roomArray) > 0) {
                 $firstRoom = current($roomArray);

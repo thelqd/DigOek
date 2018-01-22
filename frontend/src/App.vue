@@ -34,11 +34,22 @@
 </template>
 
 <script>
+import * as data from './data.js'
+import Cookie from 'js-cookie'
+
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      shared: data.shared
+    }
+  },
+  created () {
+    let auth = Cookie.getJSON('auth')
+    data.shared.user = auth
+  }
 }
 </script>
-
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -79,6 +79,24 @@ export function fetchHotel (id, cb) {
     })
 }
 
+export function logout (cb) {
+  axios.put(SERVERURL + 'logout', {
+    auth: shared.apikey,
+    usertoken: shared.user.usertoken
+  }, {
+    params: {
+      auth: shared.apikey
+    }
+  })
+    .then(function (response) {
+      console.log(response)
+      cb(null)
+    })
+    .catch(function (error) {
+      cb(error)
+      console.log(error)
+    })
+}
 export function login (username, password, cb) {
   axios.put(SERVERURL + 'login', {
     auth: shared.apikey,

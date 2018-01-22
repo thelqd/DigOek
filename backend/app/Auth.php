@@ -3,6 +3,9 @@
 namespace App;
 
 
+use App\Models\Authinfo;
+use App\Models\Supplier;
+
 class Auth
 {
     const SALT = 'e45fd2';
@@ -41,5 +44,21 @@ class Auth
     public static function generateToken($string)
     {
         return sha1($string.self::SALT);
+    }
+
+    /**
+     * @param integer $supplierId
+     * @param string $key
+     * @return boolean
+     */
+    public static function checkSupplierKey($supplierId, $key)
+    {
+        $authinfo = Authinfo::where('apikey', $key)->get();
+        if(count($authinfo->toArray()) == 1) {
+            $supplier = Supplier::where('authinfo_id', $authinfo[0]->id)->first();
+            return $supplier->id == $supplierId;
+        } else {
+            return false;
+        }
     }
 }
