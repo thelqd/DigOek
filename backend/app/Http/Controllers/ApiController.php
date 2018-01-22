@@ -79,7 +79,7 @@ class ApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @author Martin Kunz
      */
-    public function update()
+    public function update($id)
     {
         $data = $this->request->input('data', null);
         $auth = $this->request->input('auth', null);
@@ -97,18 +97,19 @@ class ApiController extends Controller
         if(!isset($hotelData['name']))
             return $this->buildResponse(false, [], "no hotel name");
         $addressData = $hotelData['address'];
-        $address = new Address();
+        
+        $hotel = Hotel::find($id);
+        $hotel->hotelchain_id = null;
+        $hotel->name = $hotelData['name'];
+        $hotel->description = $hotelData['description'];
+        $hotel->update();
+
+        $address = Address::find($hotel->address_id);
         $address->street = $addressData['street'];
         $address->zipcode = $addressData['zipcode'];
         $address->city = $addressData['city'];
         $address->update();
 
-        $hotel = new Hotel();
-        $hotel->address_id = $address->id;
-        $hotel->hotelchain_id = null;
-        $hotel->name = $hotelData['name'];
-        $hotel->description = $hotelData['description'];
-        $hotel->update();
         
         $rooms = $hotelData['rooms'];
         foreach($data['hotel']['rooms'] as $room) {
