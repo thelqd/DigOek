@@ -104,17 +104,18 @@ class ApiController extends Controller
         $hotel->description = $hotelData['description'];
         $hotel->update();
 
+        $deletedRooms = Room::where('hotel_id', $id)->delete();
+
+        $rooms = $hotelData['rooms'];
+        foreach($rooms as $room) {
+            $this->addRoom($hotel->id, $room);
+        }
+
         $address = Address::find($hotel->address_id);
         $address->street = $addressData['street'];
         $address->zipcode = $addressData['zipcode'];
         $address->city = $addressData['city'];
         $address->update();
-
-        
-        $rooms = $hotelData['rooms'];
-        foreach($data['hotel']['rooms'] as $room) {
-            $this->addRoom($hotel->id, $room);
-        }
         return $this->buildResponse(true, [], 'Hotel Updated');
     }
 
